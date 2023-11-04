@@ -1,4 +1,4 @@
-package fr.pantheonsorobnne.event_message;
+package fr.pantheonsorobnne.message_router;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,11 +31,12 @@ public class ApplicationEmetter implements Runnable {
         try (JMSContext context = connectionFactory.createContext(Session.AUTO_ACKNOWLEDGE)) {
             Message event = null;
             try {
-                event = context.createTextMessage(toJson(new EventNewPrice(8)));
+                event = context.createTextMessage(toJson(new EventNewPrice("urgent")));
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
-            context.createProducer().send(context.createTopic("M1.prices-" + username), event);
+            context.createProducer().send(context.createQueue("M1.prices-" + username), event);
+
         }
     }
 

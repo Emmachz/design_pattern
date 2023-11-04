@@ -1,4 +1,4 @@
-package fr.pantheonsorobnne.event_message;
+package fr.pantheonsorobnne.message_router;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.enterprise.context.ApplicationScoped;

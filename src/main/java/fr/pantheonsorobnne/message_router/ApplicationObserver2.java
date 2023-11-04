@@ -1,4 +1,4 @@
-package fr.pantheonsorobnne.event_message;
+package fr.pantheonsorobnne.message_router;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -15,6 +15,6 @@ public class ApplicationObserver2 extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("sjms2:topic:M1.prices-" + username).log("${body}").process(eventMessageProcessor);
+        from("direct:otherMessages" + username).log("${body}").process(eventMessageProcessor);
     }
 }
